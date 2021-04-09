@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9189048486532704230}
   - component: {fileID: 4989930107809602310}
   - component: {fileID: 376672795055014655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tile1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 5831626044394762533}
   - component: {fileID: 8204213058315783816}
   - component: {fileID: 3062824693794345848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tile3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,9 +227,9 @@ GameObject:
   - component: {fileID: 968035596450726948}
   - component: {fileID: 5108778698192837796}
   - component: {fileID: 7061441905203560384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 3_platform
-  m_TagString: Untagged
+  m_TagString: StartPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
