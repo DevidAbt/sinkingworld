@@ -18,10 +18,13 @@ public class PlatformPool : MonoBehaviour
     public float period = 1f;
     public int newRowTick = 3;
     private int tick = 0;
+    public int initTicks = 10;
 
     public float ascendingDist = 3;
     private float platformWidth;
     private System.Random random;
+    private int lastPosition = 1;
+    private bool startPlatformDestroyed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -53,19 +56,23 @@ public class PlatformPool : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextActionTime)
+        if (Time.time > nextActionTime || tick <= initTicks)
         {
-            nextActionTime += period;
-            tick++;
 
             Debug.Log($"Tick: {tick}");
-            if (tick % 3 == 1)
+            if (tick % newRowTick == 1)
             {
                 BoxCollider2D newCollider = passiveItemPool.Dequeue();
                 if (newCollider)
                 {
                     newCollider.gameObject.SetActive(true);
-                    int randomPos = this.random.Next(0, 2);
+                    int randomPos;
+                    do
+                    {
+                        randomPos = this.random.Next(0, 3);
+                    }
+                    while (randomPos == lastPosition);
+                    lastPosition = randomPos;
                     newCollider.transform.position = new Vector3(startPosition.x + platformWidth * randomPos, startPosition.y, startPosition.z);
                     activeItemPool.Enqueue(newCollider);
                     Debug.Log($"Added platform ({tick})");
@@ -87,6 +94,18 @@ public class PlatformPool : MonoBehaviour
                 BoxCollider2D removedCollider = activeItemPool.Dequeue();
                 removedCollider.gameObject.SetActive(false);
                 passiveItemPool.Enqueue(removedCollider);
+
+                if (!startPlatformDestroyed)
+                {
+                    Destroy(GameObject.FindGameObjectWithTag("StartPlatform"));
+                    startPlatformDestroyed = true;
+                }
+            }
+
+            tick++;
+            if (tick > initTicks)
+            {
+                nextActionTime += period;
             }
         }
     }

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlatformStart
+  - GameManager
+  - PlatformEnd
   layers:
   - Default
   - TransparentFX
