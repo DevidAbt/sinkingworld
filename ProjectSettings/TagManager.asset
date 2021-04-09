@@ -7,6 +7,7 @@ TagManager:
   - PlatformStart
   - GameManager
   - PlatformEnd
+  - StartPlatform
   layers:
   - Default
   - TransparentFX
