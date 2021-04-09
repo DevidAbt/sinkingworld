@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class Throw : MonoBehaviour
+public class Shoot : MonoBehaviour
 {
     public Rigidbody2D itemProto = null;
     public float speed = 30.0f;
