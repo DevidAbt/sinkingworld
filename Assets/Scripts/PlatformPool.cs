@@ -59,7 +59,7 @@ public class PlatformPool : MonoBehaviour
         if (Time.time > nextActionTime || tick <= initTicks)
         {
 
-            Debug.Log($"Tick: {tick}");
+            // Debug.Log($"Tick: {tick}");
             if (tick % newRowTick == 1)
             {
                 BoxCollider2D newCollider = passiveItemPool.Dequeue();
@@ -75,7 +75,7 @@ public class PlatformPool : MonoBehaviour
                     lastPosition = randomPos;
                     newCollider.transform.position = new Vector3(startPosition.x + platformWidth * randomPos, startPosition.y, startPosition.z);
                     activeItemPool.Enqueue(newCollider);
-                    Debug.Log($"Added platform ({tick})");
+                    // Debug.Log($"Added platform ({tick})");
                 }
             }
 

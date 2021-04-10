@@ -13,9 +13,15 @@ public class CharacterMovement : MonoBehaviour
     public float groundRadius = 0.2f;
     public LayerMask whatIsGround;
 
-    private bool doubleJumped = false;
     public float timeSpentJumping = 0f;
     public float doubleJumpStartTime = 1f;
+    private JumpStatus jumpStatus;
+    private enum JumpStatus
+    {
+        READY,
+        JUMPED,
+        DOUBLE_JUMPED
+    }
 
 
 
@@ -38,29 +44,44 @@ public class CharacterMovement : MonoBehaviour
             flip();
         }
 
+        animator.SetFloat("Speed", Mathf.Abs(this.rb.velocity.x));
+
         bool grounded = Physics2D.OverlapCircle(groundCheck.position,
                                                 groundRadius,
                                                 whatIsGround);
 
-        if (Input.GetButtonDown("Jump") && (grounded || !doubleJumped))
-        {
-            timeSpentJumping += Time.deltaTime;
-            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
-            Debug.Log(timeSpentJumping);
-            if (timeSpentJumping > doubleJumpStartTime && !grounded)
-            {
-                doubleJumped = true;
-                animator.SetTrigger("DoubleJump");
-            }
-        }
-
         if (grounded)
         {
-            doubleJumped = false;
+            this.jumpStatus = JumpStatus.READY;
             timeSpentJumping = 0;
+            Debug.Log("Grounded");
         }
 
-        animator.SetFloat("Speed", Mathf.Abs(this.rb.velocity.x));
+        if (Input.GetButtonDown("Jump") && (jumpStatus == JumpStatus.READY || jumpStatus == JumpStatus.JUMPED))
+        {
+            if (jumpStatus == JumpStatus.JUMPED)
+            {
+                if (facingRight)
+                {
+
+                    animator.SetTrigger("RollRight");
+                }
+                else
+                {
+
+                    animator.SetTrigger("RollLeft");
+                }
+                jumpStatus = JumpStatus.DOUBLE_JUMPED;
+                Debug.Log("DoubleJumped: " + timeSpentJumping);
+            }
+            else
+            {
+                jumpStatus = JumpStatus.JUMPED;
+                Debug.Log("Jumped: " + timeSpentJumping);
+            }
+            timeSpentJumping += Time.deltaTime;
+            rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        }
         animator.SetBool("Grounded", grounded);
     }
 
