@@ -1,0 +1,19 @@
+Karakter létrehozása, és mozgatása, alapvető játékfunkciók (10-15 pont)
+ - double jump, kamera mozog
+ - TODO: zombi halál
+
+Tilling, Parallaxing (5-10 pont)
+ - bg-prefab+walls vertical tiling
+ - TODO: FarBG parallaxing
+
+Animációk            (10-15 pont) 
+ - double jump: RollLeft, RollRight
+ - TODO: szörnynek animáció
+
+Object Pooling       (10-15 pont)
+ - lövedék, platformok
+ - TODO: szörnyek
+
+Spawning, respawning (10-15 pont)
+ - szörnyek random fent
+ - lövedék? tüske?
