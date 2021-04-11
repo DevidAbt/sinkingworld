@@ -20,14 +20,14 @@ public class PlayerHurt : MonoBehaviour
         return;
     }
 
-    // void OnCollisionEnter2D(Collision2D col) {
-    //     if(col.gameObject.tag=="Enemy") {
-    //         life--;
+    void OnCollisionEnter2D(Collision2D col) {
+        if(col.gameObject.tag=="Enemy") {
+            life--;
 
-    //         if(life <= 0) {
-    //             GameObject.FindGameObjectWithTag("GameManager").GetComponent<RespawnManager>().reset();
-    //         }
-    //     }
-    // }
+            if(life <= 0) {
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<RespawnManager>().reset();
+            }
+        }
+    }
 
 }
