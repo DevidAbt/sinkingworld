@@ -17,4 +17,3 @@ Object Pooling       (10-15 pont)
 Spawning, respawning (10-15 pont)
  - zombie random fent
  - zombie alul meghal
- - lövedék? tüske?
