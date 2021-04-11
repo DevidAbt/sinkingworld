@@ -4,7 +4,7 @@ Karakter létrehozása, és mozgatása, alapvető játékfunkciók (10-15 pont)
 
 Tilling, Parallaxing (5-10 pont)
  - bg-prefab+walls vertical tiling
- - TODO: FarBG parallaxing
+ - FarBG parallaxing
 
 Animációk            (10-15 pont) 
  - double jump: RollLeft, RollRight
