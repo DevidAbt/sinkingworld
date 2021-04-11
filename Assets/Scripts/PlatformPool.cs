@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlatformPool : MonoBehaviour
 {
-    public BoxCollider2D itemProto = null;
+    public BoxCollider2D platformProto = null;
 
     private Vector3 startPosition;
     private Vector3 endPosition;
     public Vector3 bias = new Vector3(0, 0, 0);
 
-    public int itemPoolSize = 1;
+    public int platformPoolSize = 1;
     private Queue<BoxCollider2D> activeItemPool;
     private Queue<BoxCollider2D> passiveItemPool;
 
@@ -23,8 +23,14 @@ public class PlatformPool : MonoBehaviour
     public float ascendingDist = 3;
     private float platformWidth;
     private System.Random random;
-    private int lastPosition = 1;
+    private int lastRandomPosition = 1;
     private bool startPlatformDestroyed = false;
+
+    public CapsuleCollider2D zombieProto;
+    public int zombiePoolSize;
+    private List<CapsuleCollider2D> activeZombiePool;
+    private Queue<CapsuleCollider2D> passiveZombiePool;
+    public float zombieChance;
 
     // Start is called before the first frame update
     void Start()
@@ -38,18 +44,27 @@ public class PlatformPool : MonoBehaviour
 
         Quaternion startRotation = new Quaternion();
 
-        platformWidth = itemProto.GetComponent<SpriteRenderer>().bounds.size.x * 3 + 1;
+        platformWidth = platformProto.GetComponent<SpriteRenderer>().bounds.size.x * 3 + 1;
 
         random = new System.Random();
 
         activeItemPool = new Queue<BoxCollider2D>();
         passiveItemPool = new Queue<BoxCollider2D>();
-        for (int i = 0; i < itemPoolSize; i++)
+        for (int i = 0; i < platformPoolSize; i++)
         {
             // Vector3 position = new Vector3(startTransform.position.x, startTransform.position.y, startTransform.position.z);
-            BoxCollider2D boxCollider = Instantiate(itemProto, startPosition, startRotation);
+            BoxCollider2D boxCollider = Instantiate(platformProto, startPosition, startRotation);
             boxCollider.gameObject.SetActive(false);
             passiveItemPool.Enqueue(boxCollider);
+        }
+
+        activeZombiePool = new List<CapsuleCollider2D>();
+        passiveZombiePool = new Queue<CapsuleCollider2D>();
+        for (int i = 0; i < zombiePoolSize; i++)
+        {
+            CapsuleCollider2D zombie = Instantiate(zombieProto, startPosition, startRotation);
+            zombie.gameObject.SetActive(false);
+            passiveZombiePool.Enqueue(zombie);
         }
     }
 
@@ -71,11 +86,24 @@ public class PlatformPool : MonoBehaviour
                     {
                         randomPos = this.random.Next(0, 3);
                     }
-                    while (randomPos == lastPosition);
-                    lastPosition = randomPos;
-                    newCollider.transform.position = new Vector3(startPosition.x + platformWidth * randomPos, startPosition.y, startPosition.z);
+                    while (randomPos == lastRandomPosition);
+                    lastRandomPosition = randomPos;
+                    Vector3 platformPostition = new Vector3(startPosition.x + platformWidth * randomPos, startPosition.y, startPosition.z);
+                    newCollider.transform.position = platformPostition;
                     activeItemPool.Enqueue(newCollider);
                     // Debug.Log($"Added platform ({tick})");
+
+                    if (random.NextDouble() < zombieChance && tick > initTicks)
+                    {
+                        CapsuleCollider2D zombie = passiveZombiePool.Dequeue();
+                        if (zombie)
+                        {
+                            zombie.isTrigger = false;
+                            zombie.transform.position = platformPostition + new Vector3(0, 3, 0);
+                            zombie.gameObject.SetActive(true);
+                            activeZombiePool.Add(zombie);
+                        }
+                    }
                 }
             }
 
@@ -110,8 +138,15 @@ public class PlatformPool : MonoBehaviour
         }
     }
 
-    public Queue<BoxCollider2D> getActiveItemPool()
+    public Queue<BoxCollider2D> GetActiveItemPool()
     {
         return activeItemPool;
+    }
+
+    public void ZombieDie(CapsuleCollider2D capsuleCollider)
+    {
+        activeZombiePool.Remove(capsuleCollider);
+        capsuleCollider.gameObject.SetActive(false);
+        passiveZombiePool.Enqueue(capsuleCollider);
     }
 }

@@ -17,7 +17,7 @@ public class PlayerRespawner : Respawner
     }
 
     public override void Respawn() {
-        BoxCollider2D[] platforms = platformPool.getActiveItemPool().ToArray();
+        BoxCollider2D[] platforms = platformPool.GetActiveItemPool().ToArray();
         original_position = platforms[2].transform.position + new Vector3(0, 3, 0);
 
         base.Respawn();

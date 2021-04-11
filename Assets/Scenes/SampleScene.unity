@@ -1357,14 +1357,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e757f66541915bec80866ca50556940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemProto: {fileID: 7061441905203560384, guid: dee637911add52478a200aee4916a518,
+  platformProto: {fileID: 7061441905203560384, guid: dee637911add52478a200aee4916a518,
     type: 3}
   bias: {x: 0, y: 0, z: 0}
-  itemPoolSize: 30
+  platformPoolSize: 30
   period: 1
   newRowTick: 3
   initTicks: 40
   ascendingDist: 2
+  zombieProto: {fileID: 8147742773025737271, guid: 56410e58fbb595c688ad12ebf1afad43,
+    type: 3}
+  zombiePoolSize: 30
+  zombieChance: 0.3
 --- !u!114 &587294356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1710,43 +1714,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &904225082 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8147742773025737270, guid: 56410e58fbb595c688ad12ebf1afad43,
-    type: 3}
-  m_PrefabInstance: {fileID: 8147742772809558796}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &904225083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904225082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbf90baedb8728d75b6411fd45a803a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!95 &904225087
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904225082}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf8101646a9fd6d65bbf97e33957a1e8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &939703555
 GameObject:
   m_ObjectHideFlags: 0
@@ -4707,6 +4674,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 904225083, guid: 56410e58fbb595c688ad12ebf1afad43, type: 3}
+      propertyPath: fallDeathCheck
+      value: 
+      objectReference: {fileID: 1386856863}
     - target: {fileID: 8147742773025737266, guid: 56410e58fbb595c688ad12ebf1afad43,
         type: 3}
       propertyPath: m_RootOrder
@@ -4766,11 +4737,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie
-      objectReference: {fileID: 0}
-    - target: {fileID: 8147742773025737270, guid: 56410e58fbb595c688ad12ebf1afad43,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56410e58fbb595c688ad12ebf1afad43, type: 3}
