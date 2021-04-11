@@ -70,4 +70,17 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-/Assets/_Sprites/
+/Assets/_Sprites/_Characters/ninjagirlnew
+/Assets/_Sprites/_Characters/ninjagirlnew.meta
+/Assets/_Sprites/_Characters/zombiefiles/female
+/Assets/_Sprites/_Characters/zombiefiles/female.meta
+/Assets/_Sprites/_Tiles/deserttileset
+/Assets/_Sprites/_Tiles/deserttileset.meta
+/Assets/_Sprites/_Tiles/freetileset
+/Assets/_Sprites/_Tiles/freetileset.meta
+/Assets/_Sprites/_Tiles/graveyardtilesetnew
+/Assets/_Sprites/_Tiles/graveyardtilesetnew.meta
+/Assets/_Sprites/_Tiles/wintertileset
+/Assets/_Sprites/_Tiles/wintertileset.meta
+/Assets/_Sprites/AstronautShooter
+/Assets/_Sprites/AstronautShooter.meta
