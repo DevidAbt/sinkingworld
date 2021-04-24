@@ -23,6 +23,8 @@ public class CharacterMovement : MonoBehaviour
         DOUBLE_JUMPED
     }
 
+    private ParticleSystem particleSystem;
+
 
 
     // Start is called before the first frame update
@@ -30,6 +32,7 @@ public class CharacterMovement : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         animator = this.GetComponent<Animator>();
+        particleSystem = this.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -71,6 +74,9 @@ public class CharacterMovement : MonoBehaviour
 
                     animator.SetTrigger("RollLeft");
                 }
+
+                particleSystem.Play();
+
                 jumpStatus = JumpStatus.DOUBLE_JUMPED;
                 Debug.Log("DoubleJumped: " + timeSpentJumping);
             }

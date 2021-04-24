@@ -4,12 +4,14 @@ public class EnemyHurt : MonoBehaviour
 {
     private Animator animator;
     private Transform fallDeathCheck;
+    private ParticleSystem particleSystem;
 
 
     void Start()
     {
         animator = this.GetComponent<Animator>();
         fallDeathCheck = GameObject.FindGameObjectWithTag("PlatformEnd").transform;
+        particleSystem = GetComponent<ParticleSystem>();
     }
     void Update()
     {
@@ -26,6 +28,7 @@ public class EnemyHurt : MonoBehaviour
     {
         if (col.gameObject.tag == "Weapon")
         {
+            particleSystem.Play();
             animator.SetTrigger("Fall");
             this.GetComponent<CapsuleCollider2D>().isTrigger = true;
         }
