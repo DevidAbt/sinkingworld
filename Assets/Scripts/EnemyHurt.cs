@@ -26,7 +26,7 @@ public class EnemyHurt : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Weapon")
+        if (col.gameObject.tag == "Weapon" || col.gameObject.name == "Saw")
         {
             particleSystem.Play();
             animator.SetTrigger("Fall");
