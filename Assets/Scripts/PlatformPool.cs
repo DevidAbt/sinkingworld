@@ -33,6 +33,8 @@ public class PlatformPool : MonoBehaviour
     private Queue<CapsuleCollider2D> passiveZombiePool;
     public float zombieChance;
 
+    private ScoreManager scoreManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +69,8 @@ public class PlatformPool : MonoBehaviour
             zombie.gameObject.SetActive(false);
             passiveZombiePool.Enqueue(zombie);
         }
+
+        scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
@@ -135,7 +139,9 @@ public class PlatformPool : MonoBehaviour
             if (tick > initTicks)
             {
                 nextActionTime = Time.time + period;
-                // nextActionTime += period;
+                if (tick % 3 == 0) {
+                    scoreManager.addScore(1);
+                }
             }
         }
     }

@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (facingRight && horiz < 0 || !facingRight && horiz > 0)
         {
-            flip();
+            flip(horiz > 0);
         }
 
         animator.SetFloat("Speed", Mathf.Abs(this.rb.velocity.x));
@@ -57,7 +57,6 @@ public class CharacterMovement : MonoBehaviour
         {
             this.jumpStatus = JumpStatus.READY;
             timeSpentJumping = 0;
-            Debug.Log("Grounded");
         }
 
         if (Input.GetButtonDown("Jump") && (jumpStatus == JumpStatus.READY || jumpStatus == JumpStatus.JUMPED))
@@ -78,12 +77,10 @@ public class CharacterMovement : MonoBehaviour
                 particleSystem.Play();
 
                 jumpStatus = JumpStatus.DOUBLE_JUMPED;
-                Debug.Log("DoubleJumped: " + timeSpentJumping);
             }
             else
             {
                 jumpStatus = JumpStatus.JUMPED;
-                Debug.Log("Jumped: " + timeSpentJumping);
             }
             timeSpentJumping += Time.deltaTime;
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
@@ -91,9 +88,9 @@ public class CharacterMovement : MonoBehaviour
         animator.SetBool("Grounded", grounded);
     }
 
-    private void flip()
+    private void flip(bool right)
     {
-        facingRight = !facingRight;
+        facingRight = right;
 
         Vector3 newLocalScale = transform.localScale;
         newLocalScale.x *= -1;

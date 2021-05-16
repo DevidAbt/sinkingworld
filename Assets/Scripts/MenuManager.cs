@@ -8,15 +8,28 @@ public class MenuManager : MonoBehaviour
     private Rigidbody2D sawRigidBody;
     private float lastSpeed = 250;
     private GameObject resumeButton;
+    public GameObject player;
 
     void Start()
     {
         platformPool = GetComponent<PlatformPool>();
         GameObject saw = GameObject.Find("Saw");
-        enemyAI = saw.GetComponent<EnemyAI>();
-        sawRigidBody = saw.GetComponent<Rigidbody2D>();
+        if (saw != null)
+        {
+            enemyAI = saw.GetComponent<EnemyAI>();
+            sawRigidBody = saw.GetComponent<Rigidbody2D>();
+        }
         resumeButton = GameObject.Find("resume");
-        resumeButton.SetActive(false);
+        if (resumeButton != null)
+        {
+            resumeButton.SetActive(false);
+        }
+    }
+
+    public void back()
+    {
+        player.GetComponent<PlayerHurt>().die();
+        switchToMainMenu();
     }
 
     public void switchToMainMenu()
@@ -26,6 +39,10 @@ public class MenuManager : MonoBehaviour
     public void switchToGameScene()
     {
         SceneManager.LoadScene(1);
+    }
+    public void switchToAchievements()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void pauseGame()

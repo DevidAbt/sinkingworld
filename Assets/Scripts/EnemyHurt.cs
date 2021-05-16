@@ -5,6 +5,7 @@ public class EnemyHurt : MonoBehaviour
     private Animator animator;
     private Transform fallDeathCheck;
     private ParticleSystem particleSystem;
+    private ScoreManager scoreManager;
 
 
     void Start()
@@ -12,6 +13,7 @@ public class EnemyHurt : MonoBehaviour
         animator = this.GetComponent<Animator>();
         fallDeathCheck = GameObject.FindGameObjectWithTag("PlatformEnd").transform;
         particleSystem = GetComponent<ParticleSystem>();
+        scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
     }
     void Update()
     {
@@ -28,6 +30,7 @@ public class EnemyHurt : MonoBehaviour
     {
         if (col.gameObject.tag == "Weapon" || col.gameObject.name == "Saw")
         {
+            scoreManager.addScore(5);
             particleSystem.Play();
             animator.SetTrigger("Fall");
             this.GetComponent<CapsuleCollider2D>().isTrigger = true;

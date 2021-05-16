@@ -11,7 +11,6 @@ public class PlayerRespawner : Respawner
     protected override void Start()
     {
         base.Start();
-        original_life = this.GetComponent<PlayerHurt>().life;
 
         platformPool = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PlatformPool>();
     }
@@ -21,8 +20,6 @@ public class PlayerRespawner : Respawner
         original_position = platforms[2].transform.position + new Vector3(0, 3, 0);
 
         base.Respawn();
-
-        this.GetComponent<PlayerHurt>().life = original_life;
     }
 
 }

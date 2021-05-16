@@ -47,6 +47,7 @@
      <Compile Include="Assets\Scripts\RemoveByTime.cs" />
      <Compile Include="Assets\Scripts\RespawnManager.cs" />
      <Compile Include="Assets\Scripts\Respawner.cs" />
+     <Compile Include="Assets\Scripts\ScoreManager.cs" />
      <Compile Include="Assets\Scripts\Shoot.cs" />
      <Compile Include="Assets\Scripts\SmoothCameraOnlyVertical.cs" />
      <Compile Include="Assets\Scripts\VerticalParallaxing.cs" />
