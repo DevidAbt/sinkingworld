@@ -77,6 +77,8 @@ public class CharacterMovement : MonoBehaviour
                 particleSystem.Play();
 
                 jumpStatus = JumpStatus.DOUBLE_JUMPED;
+
+                AudioManager.instance.PlaySound("Jump");
             }
             else
             {

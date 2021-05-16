@@ -30,6 +30,7 @@ public class EnemyHurt : MonoBehaviour
     {
         if (col.gameObject.tag == "Weapon" || col.gameObject.name == "Saw")
         {
+            AudioManager.instance.PlaySound("ZombieDeath");
             scoreManager.addScore(5);
             particleSystem.Play();
             animator.SetTrigger("Fall");

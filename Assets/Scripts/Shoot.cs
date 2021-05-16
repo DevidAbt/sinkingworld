@@ -38,6 +38,7 @@ public class Shoot : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
+            AudioManager.instance.PlaySound("Shot");
             Rigidbody2D itemClone = getItemFromPool();
             if (itemClone)
             {

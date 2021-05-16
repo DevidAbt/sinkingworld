@@ -28,25 +28,34 @@ public class MenuManager : MonoBehaviour
 
     public void back()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
         player.GetComponent<PlayerHurt>().die();
         switchToMainMenu();
     }
 
     public void switchToMainMenu()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
+        AudioManager.instance.StopSound("DarkFactory");
+        AudioManager.instance.PlaySound("MenuMusic");
         SceneManager.LoadScene(0);
     }
     public void switchToGameScene()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
         SceneManager.LoadScene(1);
     }
     public void switchToAchievements()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
         SceneManager.LoadScene(2);
     }
 
     public void pauseGame()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
+        AudioManager.instance.StopSound("DarkFactory");
+        AudioManager.instance.PlaySound("MenuMusic");
         platformPool.paused = true;
         lastSpeed = enemyAI.speed;
         enemyAI.speed = 0;
@@ -57,6 +66,9 @@ public class MenuManager : MonoBehaviour
 
     public void resumeGame()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
+        AudioManager.instance.StopSound("MenuMusic");
+        AudioManager.instance.PlaySound("DarkFactory");
         platformPool.paused = false;
         enemyAI.speed = lastSpeed;
         sawRigidBody.isKinematic = false;
@@ -65,6 +77,7 @@ public class MenuManager : MonoBehaviour
 
     public void quit()
     {
+        AudioManager.instance.PlaySound("ButtonClick");
         Application.Quit();
     }
 

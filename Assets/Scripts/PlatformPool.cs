@@ -71,6 +71,9 @@ public class PlatformPool : MonoBehaviour
         }
 
         scoreManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<ScoreManager>();
+
+        AudioManager.instance.StopSound("MenuMusic");
+        AudioManager.instance.PlaySound("DarkFactory");
     }
 
     // Update is called once per frame

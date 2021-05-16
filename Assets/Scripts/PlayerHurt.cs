@@ -38,6 +38,7 @@ public class PlayerHurt : MonoBehaviour
 
     void hurt()
     {
+        AudioManager.instance.PlaySound("PlayerDeath");
         lives--;
         livesText.text = lives.ToString();
         if (lives < 1)
@@ -48,6 +49,8 @@ public class PlayerHurt : MonoBehaviour
 
     public void die()
     {
+        AudioManager.instance.StopSound("DarkFactory");
+        AudioManager.instance.PlaySound("MenuMusic");
         scoreManager.updateLastScore();
         SceneManager.LoadScene(2);
         CharacterMovement.facingRight = true;
