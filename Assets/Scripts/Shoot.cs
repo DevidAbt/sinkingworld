@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Shoot : MonoBehaviour
 {
@@ -35,19 +36,23 @@ public class Shoot : MonoBehaviour
 
     void throwItem()
     {
-        Rigidbody2D itemClone = getItemFromPool();
-        if (itemClone)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            itemClone.transform.position = firePoint.position;
-            itemClone.gameObject.SetActive(true);
+            Rigidbody2D itemClone = getItemFromPool();
+            if (itemClone)
+            {
+                itemClone.transform.position = firePoint.position;
+                itemClone.gameObject.SetActive(true);
 
-            int direction = CharacterMovement.facingRight ? 1 : -1;
+                int direction = CharacterMovement.facingRight ? 1 : -1;
 
-            itemClone.velocity = transform.right * speed * direction + transform.up * vertivalSpeed;
+                itemClone.velocity = transform.right * speed * direction + transform.up * vertivalSpeed;
+            }
         }
     }
 
-    private Rigidbody2D getItemFromPool() {
+    private Rigidbody2D getItemFromPool()
+    {
         return itemPool.FirstOrDefault(x => !x.gameObject.activeSelf);
     }
 }
