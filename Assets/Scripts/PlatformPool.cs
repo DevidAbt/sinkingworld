@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlatformPool : MonoBehaviour
 {
     public BoxCollider2D platformProto = null;
+    public bool paused = false;
 
     private Vector3 startPosition;
     private Vector3 endPosition;
@@ -71,7 +72,7 @@ public class PlatformPool : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextActionTime || tick <= initTicks)
+        if (!paused && (Time.time > nextActionTime || tick <= initTicks))
         {
 
             // Debug.Log($"Tick: {tick}");
@@ -133,7 +134,8 @@ public class PlatformPool : MonoBehaviour
             tick++;
             if (tick > initTicks)
             {
-                nextActionTime += period;
+                nextActionTime = Time.time + period;
+                // nextActionTime += period;
             }
         }
     }
